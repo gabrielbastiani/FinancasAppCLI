@@ -19,7 +19,7 @@ color: #FFF;
 export const NewLink = styled.TouchableOpacity`
 justify-content: center;
 align-items: center;
-background-color: #00b94a;
+background-color: orange;
 width: 90%;
 height: 45px; 
 border-radius: 10px;

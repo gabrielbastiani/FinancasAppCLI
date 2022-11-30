@@ -25,7 +25,7 @@ font-weight: bold;
 
 export const Title = styled.Text`
 margin-left: 15px;
-color: #00b94a;
+color: orange;
 margin-bottom: 10px;
 
 `;

@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { View, Text, Button } from 'react-native';
-
 import { AuthContext } from '../../contexts/auth';
 import Header from '../../components/Header';
-
 import { Background, Container, Nome, Saldo, Title} from './styles';
+
 
 export default function Home() {
 
@@ -14,7 +13,7 @@ export default function Home() {
     <Background>
       <Header/>
       <Container>
-        <Nome>Matheus</Nome>
+        <Nome>Gabriel</Nome>
         <Saldo>R$ 123,00</Saldo>
       </Container>
 
