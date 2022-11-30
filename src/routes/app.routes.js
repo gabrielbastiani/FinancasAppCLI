@@ -2,14 +2,28 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Home from '../pages/Home';
+import New from '../pages/New';
+import Profile from '../pages/Profile';
 
 const AppDrawer = createDrawerNavigator();
 
-function AppRoutes() {
-    return (
-        <AppDrawer.Navigator>
-            <AppDrawer.Screen name="Home" component={Home} />
-        </AppDrawer.Navigator>
+function AppRoutes(){
+    return(
+    <AppDrawer.Navigator
+    screenOptions={{
+        drawerActiveTintColor: '#fff',
+        drawerActiveBackgroundColor: 'orange',
+        drawerInactiveBackgroundColor: '#000',
+        drawerInactiveTintColor: '#ddd',
+        drawerStyle: {backgroundColor: '#171717'},
+        drawerItemStyle: {marginVertical: 5},
+        drawerLabelStyle: {fontWeight: 'bold'}
+    }}
+    >
+        <AppDrawer.Screen name="Home" component={Home}/>
+        <AppDrawer.Screen name="Registrar" component={New} />
+        <AppDrawer.Screen name="Perfil" component={Profile} />
+    </AppDrawer.Navigator>
     );
 }
 
