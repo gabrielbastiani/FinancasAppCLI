@@ -1,8 +1,8 @@
 import React, { useState, createContext, useEffect } from 'react';
 import firebase from '../services/firebaseConnection';
 import AsyncStorage from '@react-native-community/async-storage';
-
 export const AuthContext = createContext({});
+
 
 function AuthProvider({ children }){
     const [user, setUser] = useState(null);

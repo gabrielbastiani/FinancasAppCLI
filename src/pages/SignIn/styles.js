@@ -33,7 +33,7 @@ import styled from 'styled-components/native';
 export const SubmitButton = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
-    background-color: #00b94a;
+    background-color: orange;
     width: 90%;
     height: 45px;
     border-radius: 7px;
