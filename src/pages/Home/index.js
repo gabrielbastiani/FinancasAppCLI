@@ -1,28 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
+import firebase from '../../services/firebaseConnection';
+import { format } from 'date-fns';
 import { AuthContext } from '../../contexts/auth';
 import Header from '../../components/Header';
-import { Background, Container, List, Nome, Saldo, Title} from './styles';
 import HistoricoList from '../../components/HistoricoList';
 
+import { Background, Container, Nome, Saldo, Title, List } from './styles';
 
 export default function Home() {
-
-  const [historico, setHistorico] = useState([
-    {key: '1', tipo: 'receita', valor: 1200},
-    {key: '2', tipo: 'receita', valor: 200},
-    {key: '3', tipo: 'receita', valor: 40},
-    {key: '4', tipo: 'receita', valor: 89.62},
-  ]);
+  const [historico, setHistorico] = useState([]);
+  const [saldo, setSaldo] = useState(0);
 
   const { user } = useContext(AuthContext);
+  const uid = user && user.uid;
 
- return (
+  useEffect(() => {
+    async function loadList() {
+      await firebase.database().ref('users').child(uid).on('value', (snapshot) => {
+        setSaldo(snapshot.val().saldo);
+      });
+
+      await firebase.database().ref('historico')
+      .child(uid)
+      .orderByChild('data').equalTo(format(new Date, 'dd/MM/yy'))
+    }
+
+    loadList();
+  }, [])
+
+  return (
     <Background>
-      <Header/>
+      <Header />
       <Container>
         <Nome>{user && user.nome}</Nome>
-        <Saldo>R$ 123,00</Saldo>
+        <Saldo>R$ {saldo.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}</Saldo>
       </Container>
 
       <Title>Ultimas movimentações</Title>
@@ -30,8 +42,8 @@ export default function Home() {
       <List
         showsVerticalScrollIndicator={false}
         data={historico}
-        keyExtractor={ item => item.key }
-        renderItem={ ({item}) => (<HistoricoList data={item} />)}
+        keyExtractor={item => item.key}
+        renderItem={({ item }) => (<HistoricoList data={item} />)}
       />
 
     </Background>
