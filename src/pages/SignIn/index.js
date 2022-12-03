@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react';
-import { Platform } from 'react-native';
+import { Platform, ActivityIndicator, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../contexts/auth';
 
-import { Background, Container, Logo, AreaInput, Input, SubmitButton, 
+import { Background, Container, Logo, TextApp, AreaInput, Input, SubmitButton, 
 SubmitText, Link, LinkText} from './styles';
 
 export default function SignIn() {
@@ -12,7 +12,7 @@ export default function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loadingAuth } = useContext(AuthContext);
 
 
   function handleLogin(){
@@ -26,6 +26,10 @@ export default function SignIn() {
       enabled
       >
         <Logo source={require('../../assets/Logo.png')}/>
+
+        <TextApp>
+          <Text>Controle Financeiro Builder</Text>
+        </TextApp>
         
         <AreaInput>
           <Input
@@ -44,11 +48,18 @@ export default function SignIn() {
           autoCapitalize="none"
           value={password}
           onChangeText={ (text) => setPassword(text) }
+          secureTextEntry={true}
           />
         </AreaInput>
 
       <SubmitButton onPress={handleLogin}>
-        <SubmitText>Acessar</SubmitText>
+        {
+          loadingAuth ? (
+            <ActivityIndicator size={20} color="#FFF" />
+          ) : (
+            <SubmitText>Acessar</SubmitText>
+          )
+        }
       </SubmitButton>
 
       <Link onPress={ () => navigation.navigate('SignUp')}>

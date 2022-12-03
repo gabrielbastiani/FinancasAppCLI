@@ -22,7 +22,7 @@ function AuthRoutes(){
             headerStyle:{
                 backgroundColor: '#131313',
                 borderBottomWidth: 1,
-                borderBottomColor: '#00b94a'
+                borderBottomColor: 'orange'
             },
             headerTintColor: '#FFF',
             headerBackTitleVisible: false,
