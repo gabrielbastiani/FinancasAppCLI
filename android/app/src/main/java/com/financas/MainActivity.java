@@ -1,4 +1,4 @@
-package com.financas;
+package com.financasbuildernegocioonline;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
